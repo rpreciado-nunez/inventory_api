@@ -3,9 +3,19 @@ from app.models.product import Base
 from app.models import  order, order_item,user
 from app.db.database import engine
 from app.routes import product,order,user
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 # 1. Crear app PRIMERO
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 2. Registrar rutas
 app.include_router(product.router)
